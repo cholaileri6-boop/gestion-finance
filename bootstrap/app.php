@@ -11,9 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
    ->withMiddleware(function (Middleware $middleware) {
-   $middleware->alias([
-   'admin' => \App\Http\Middleware\AdminMiddleware::class,
-   ]);
+       // Faire confiance au proxy HTTPS (Traefik/Coolify/Nginx reverse proxy)
+       // Permet à Laravel de détecter HTTPS depuis X-Forwarded-Proto
+       $middleware->trustProxies(at: '*');
+
+       $middleware->alias([
+           'admin' => \App\Http\Middleware\AdminMiddleware::class,
+       ]);
    })
 
     ->withExceptions(function (Exceptions $exceptions): void {

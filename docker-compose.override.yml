@@ -1,0 +1,14 @@
+# Ce fichier est chargé AUTOMATIQUEMENT par Docker Compose en local.
+# Il rajoute les bindings de ports nécessaires pour le développement local.
+# Coolify n'utilise que docker-compose.yml → pas de conflit avec Traefik.
+
+services:
+  app:
+    container_name: gestion-finance-app
+    ports:
+      - "80:80"
+
+  db:
+    container_name: gestion-finance-db
+    ports:
+      - "3306:3306"

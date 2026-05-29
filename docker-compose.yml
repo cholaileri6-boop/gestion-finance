@@ -3,9 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: gestion-finance-app
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     environment:
       - APP_NAME=${APP_NAME:-GestionFinance}
       - APP_ENV=${APP_ENV:-production}
@@ -43,14 +42,13 @@ services:
 
   db:
     image: mysql:8.0.36
-    container_name: gestion-finance-db
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-RootPassword2024!Secure}
       MYSQL_DATABASE: ${DB_DATABASE:-gestion_finance}
       MYSQL_USER: ${DB_USERNAME:-gestion}
       MYSQL_PASSWORD: ${DB_PASSWORD:-GestionFinance2024!Secure}
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - gestion-finance-db:/var/lib/mysql
     networks:

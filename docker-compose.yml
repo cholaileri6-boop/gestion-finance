@@ -23,10 +23,7 @@ services:
       - LOG_CHANNEL=${LOG_CHANNEL:-stack}
       - MAIL_MAILER=${MAIL_MAILER:-log}
     volumes:
-      - ./storage/logs:/app/storage/logs
-      - ./storage/app:/app/storage/app
-      - ./database:/app/database
-      - ./bootstrap/cache:/app/bootstrap/cache
+      - gestion-finance-storage:/app/storage
     depends_on:
       db:
         condition: service_healthy
@@ -68,4 +65,6 @@ networks:
 
 volumes:
   gestion-finance-db:
+    driver: local
+  gestion-finance-storage:
     driver: local

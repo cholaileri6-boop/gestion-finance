@@ -12,6 +12,14 @@ if [ ! -f /app/.env ]; then
     touch /app/.env
 fi
 
+# Vider tout cache config/route/view résiduel (fichiers commités ou volume stale)
+# pour que Laravel lise les vraies variables d'environnement
+php artisan config:clear  2>/dev/null || true
+php artisan cache:clear   2>/dev/null || true
+
+# Fixer les permissions sur storage/ (peut être root-owned sur les bind mounts Coolify)
+chown -R www-data:www-data /app/storage /app/bootstrap/cache 2>/dev/null || true
+
 # ------------------------------------------------------------
 # Attendre que MySQL accepte les connexions (au-delà du healthcheck)
 # ------------------------------------------------------------

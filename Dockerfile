@@ -36,6 +36,11 @@ RUN composer install --no-dev --no-scripts --no-autoloader --no-interaction --pr
 # 2. Copier tout le code (artisan inclus), puis régénérer l'autoloader
 #    → déclenche package:discover avec artisan disponible
 COPY . .
+
+# Supprimer les fichiers de cache commités (config, routes, services)
+# qui pourraient bloquer la lecture des variables d'environnement en prod
+RUN find bootstrap/cache -name '*.php' -delete
+
 RUN composer dump-autoload --optimize --no-dev
 
 # ============================================================

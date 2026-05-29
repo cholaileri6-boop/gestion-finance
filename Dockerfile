@@ -46,7 +46,7 @@ RUN composer dump-autoload --optimize --no-dev
 # ============================================================
 # Stage 2: Node.js — Build des assets Vite
 # ============================================================
-FROM node:18-alpine AS assets
+FROM node:22-alpine AS assets
 
 WORKDIR /app
 

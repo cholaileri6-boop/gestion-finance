@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
 {
 Schema::create('depenses', function (Blueprint $table) {
-$table->id();
-$table->foreignId('user_id')->constrained()->cascadeOnDelete();
-$table->string('categorie');
-$table->decimal('amount',10,2);
-$table->string('description')->nullable();
-$table->date('date');
-$table->timestamps();
+    $table->id();
+    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+    $table->decimal('amount', 10, 2);
+    $table->string('description')->nullable();
+    $table->date('date');
+    $table->timestamps();
 });
 }
 

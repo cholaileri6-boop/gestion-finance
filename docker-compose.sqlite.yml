@@ -1,0 +1,39 @@
+# Configuration Docker Compose avec SQLite (simplifié, pour dev/petites apps)
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gestion-finance-app
+    ports:
+      - "${APP_PORT:-80}:80"
+    environment:
+      - APP_NAME=${APP_NAME:-Laravel}
+      - APP_ENV=${APP_ENV:-production}
+      - APP_DEBUG=${APP_DEBUG:-false}
+      - APP_URL=${APP_URL:-http://localhost}
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/app/database/gestion_finance.sqlite
+      - CACHE_STORE=database
+      - QUEUE_CONNECTION=database
+      - SESSION_DRIVER=database
+      - LOG_CHANNEL=stack
+    volumes:
+      - ./storage/logs:/app/storage/logs
+      - ./storage/app:/app/storage/app
+      - ./database:/app/database
+    networks:
+      - gestion-finance
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+networks:
+  gestion-finance:
+    driver: bridge

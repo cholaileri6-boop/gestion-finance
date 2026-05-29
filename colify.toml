@@ -1,0 +1,19 @@
+# Configuration Colify - Gestion Finance
+# Zero-config deployment - Tout est pré-configuré!
+
+[build]
+dockerfile = "Dockerfile"
+
+[deployment]
+port = 80
+health_check_path = "/health"
+
+[environment]
+# Aucune configuration requise!
+# Colify détectera automatiquement et utilisera:
+# - APP_KEY (auto-généré)
+# - APP_URL (votre domaine)
+# - DB et autres variables (déjà pré-configurées)
+
+# Optionnel: Customiser
+# APP_URL = "https://votre-domaine.com"

@@ -801,10 +801,9 @@
                             <label class="f-lbl">Catégorie</label>
                             <select name="category_id" required class="f-inp f-sel">
                                 <option value="">Choisir une catégorie</option>
-                                <option value="1">Alimentation</option>
-                                <option value="2">Transport</option>
-                                <option value="7">Loisirs</option>
-                                <option value="8">Santé</option>
+                                @foreach ($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
                             </select>
                             <div class="btn-row"><button type="button" @click="open=false"
                                     class="btn-ghost">Annuler</button><button type="submit"
@@ -878,10 +877,9 @@
                             x-model="titre" class="f-inp">
                         <label class="f-lbl">Catégorie</label>
                         <select name="category_id" x-model="categorie" class="f-inp f-sel">
-                            <option value="1">Alimentation</option>
-                            <option value="2">Transport</option>
-                            <option value="7">Loisirs</option>
-                            <option value="8">Santé</option>
+                            @foreach ($categories as $cat)
+                                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endforeach
                         </select>
                         <div class="btn-row"><button type="button" @click="openEdit=false"
                                 class="btn-ghost">Annuler</button><button type="submit"

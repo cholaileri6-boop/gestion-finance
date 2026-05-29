@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('revenus', RevenuController::class)->middleware('auth');
 
-Route::resource('depenses', DepenseController::class);
+Route::resource('depenses', DepenseController::class)->middleware('auth');
 
 Route::resource('budgets', BudgetController::class);
 

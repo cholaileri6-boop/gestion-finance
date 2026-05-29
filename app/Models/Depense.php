@@ -9,14 +9,18 @@ class Depense extends Model
 {
     use HasFactory;
 
-   protected $fillable = [
-   'user_id',
-   'amount',
-   'description',
-   'category_id',
-   'date'
-   ];
-    
+    protected $fillable = [
+        'user_id',
+        'amount',
+        'description',
+        'category_id',
+        'date',
+    ];
+
+    protected $casts = [
+        'date'   => 'date:Y-m-d',
+        'amount' => 'decimal:2',
+    ];
 
     public function user()
     {
@@ -25,6 +29,6 @@ class Depense extends Model
 
     public function category()
     {
-    return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

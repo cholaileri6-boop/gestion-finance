@@ -116,7 +116,8 @@ COPY ./docker/nginx.conf       /etc/nginx/nginx.conf
 COPY ./docker/default.conf     /etc/nginx/http.d/default.conf
 COPY ./docker/supervisord.conf /etc/supervisord.conf
 COPY ./docker/entrypoint.sh    /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY ./docker/startup.sh       /startup.sh
+RUN chmod +x /entrypoint.sh /startup.sh
 
 EXPOSE 80
 
